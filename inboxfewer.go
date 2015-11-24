@@ -67,7 +67,7 @@ func (c *FewerClient) ForeachThread(q string, fn func(*gmail.Thread) error) erro
 }
 
 func readGithubConfig() {
-	file := filepath.Join(os.Getenv("HOME"), "keys", "github-inboxfewer.token")
+	file := filepath.Join(HomeDir(), "keys", "github-inboxfewer.token")
 	slurp, err := ioutil.ReadFile(file)
 	if err != nil {
 		log.Fatal(err)
