@@ -10,6 +10,7 @@ package main
 
 import (
 	"bufio"
+	"context"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -24,7 +25,6 @@ import (
 	"time"
 
 	"golang.org/x/build/gerrit"
-	"golang.org/x/net/context"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
 	gmail "google.golang.org/api/gmail/v1"
@@ -200,7 +200,7 @@ type gerritChange struct {
 
 func (gc gerritChange) IsStale() (bool, error) {
 	c := gerrit.NewClient("https://"+gc.Server, gerrit.NoAuth)
-	ci, err := c.GetChangeDetail(gc.ID)
+	ci, err := c.GetChangeDetail(context.Background(), gc.ID)
 	if err != nil {
 		return false, err
 	}
